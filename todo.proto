@@ -5,7 +5,7 @@ package todoPackage;
 service TodoService {
     rpc CreateTodo (Todo) returns (Todo) {}
     rpc GetTodo (TodoRequest) returns (Todo) {}
-    rpc ListTodo (Empty) returns (TodoList) {}
+    rpc ListTodos (Empty) returns (TodoList) {}
 }
 
 message Empty {}
