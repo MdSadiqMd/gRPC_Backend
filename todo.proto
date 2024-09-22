@@ -1,10 +1,14 @@
 syntax = "proto3";
 
+package todoPackage;
+
 service TodoService {
     rpc CreateTodo (Todo) returns (Todo) {}
     rpc GetTodo (TodoRequest) returns (Todo) {}
     rpc ListTodo (Empty) returns (TodoList) {}
 }
+
+message Empty {}
 
 message Todo {
     string id = 1;
