@@ -2,6 +2,8 @@ import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 
 import { serverConfig, logger } from './config';
+import { Todo } from './types/Todo.types';
+import { todos } from './data/todo.data';
 
 const packageDefinition = protoLoader.loadSync('./todo.proto', {
     keepCase: true,
@@ -12,18 +14,6 @@ const packageDefinition = protoLoader.loadSync('./todo.proto', {
 });
 
 const todoProto = grpc.loadPackageDefinition(packageDefinition).todoPackage as any;
-
-interface Todo {
-    id: string;
-    title: string;
-    content: string;
-}
-
-const todos: Todo[] = [
-    { id: '1', title: 'Todo - 1', content: 'Content - 1' },
-    { id: '2', title: 'Todo - 2', content: 'Content - 2' },
-    { id: '3', title: 'Todo - 3', content: 'Content - 3' },
-];
 
 const server = new grpc.Server();
 
