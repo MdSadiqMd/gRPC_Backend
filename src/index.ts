@@ -1,6 +1,8 @@
 import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 
+import { serverConfig, logger } from './config';
+
 const packageDefinition = protoLoader.loadSync('./todo.proto', {
     keepCase: true,
     longs: String,
@@ -48,11 +50,11 @@ server.addService(todoProto.TodoService.service, {
     }
 });
 
-const address = '127.0.0.1:50051';
+const address = `127.0.0.1:${serverConfig.PORT}`;
 server.bindAsync(address, grpc.ServerCredentials.createInsecure(), (err, port) => {
     if (err) {
-        console.error(`Server failed to bind: ${err.message}`);
+        logger.error(`Server failed to bind: ${err.message}`);
         return;
     }
-    console.log(`Server started at ${address}`);
+    logger.info(`Server started at ${address}`);
 });
