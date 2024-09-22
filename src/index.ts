@@ -25,7 +25,7 @@ server.addService(todoProto.TodoService.service, {
     createTodo: (call: grpc.ServerUnaryCall<Todo, Todo>, callback: grpc.sendUnaryData<Todo>) => {
         const incomingNewTodo = call.request;
         todos.push(incomingNewTodo);
-        logger.info(`New Todo Added: ${incomingNewTodo}`);
+        logger.info(`New Todo Added: ${JSON.stringify(incomingNewTodo)}`);
         callback(null, incomingNewTodo);
     },
     getTodo: (call: grpc.ServerUnaryCall<{ id: string; }, Todo>, callback: grpc.sendUnaryData<Todo | grpc.ServiceError>) => {
